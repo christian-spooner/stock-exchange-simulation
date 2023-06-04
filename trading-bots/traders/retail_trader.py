@@ -1,0 +1,30 @@
+import random
+import time
+
+from network import *
+
+
+def main():
+    while True:
+        side = random.randint(0, 1)
+        if side == 0:
+            side = "buy"
+        else:
+            side = "sell"
+        order = {
+            "type": "market",
+            "security_id": DEFAULT_SECURITY_ID,
+            "client_id": "RETAIL",
+            "side": side,
+            "quantity": 4,
+        }
+
+        send_to_gateway(order)
+        time.sleep(5)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        pass
