@@ -1,0 +1,8 @@
+bin/
+.vscode/
+scripts/
+obj/
+libs/
+.config
+.gdbinit
+logs.txt
