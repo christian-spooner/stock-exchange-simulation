@@ -1,8 +1,9 @@
 import json
 import socket
+import time
 
 
-def get_balance_request(command):
+def send_settlement_command(command):
     host = "127.0.0.1"
     port = 2403
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_sock:
@@ -16,8 +17,8 @@ def get_balance_request(command):
 
         client_sock.sendall(message_bytes)
         balance = client_sock.recv(1024)
-        print(balance)
+        print(int.from_bytes(balance, byteorder="little"))
 
 
 if __name__ == "__main__":
-    get_balance_request({"type": "balance", "client_id": "SINGLE"})
+    send_settlement_command({"type": "balance", "client_id": "1"})

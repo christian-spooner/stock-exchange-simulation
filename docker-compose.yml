@@ -1,0 +1,83 @@
+version: '3.8'
+services:
+  clearinghouse:
+    build: ./core-services/clearinghouse
+    image: clearinghouse
+    ports:
+      - "2402:2402"
+      - "2403:2403"
+    depends_on: 
+      - db
+      - rabbitmq-setup
+    networks:
+      - exchange-network
+
+  market-data-feed:
+    build: ./core-services/market-data-feed
+    image: market-data-feed
+    ports:
+      - "2404:2404"
+    depends_on: 
+      - db
+      - rabbitmq-setup
+    networks:
+      - exchange-network
+
+  matching-engine:
+    build: ./core-services/matching-engine
+    image: matching-engine
+    ports:
+      - "2401:2401"
+    depends_on: 
+      - rabbitmq-setup
+    networks:
+      - exchange-network
+
+  order-entry-gateway:
+    build: ./core-services/order-entry-gateway
+    image: order-entry-gateway
+    ports:
+      - "2400:2400"
+    depends_on: 
+      - rabbitmq-setup
+    networks:
+      - exchange-network
+
+  db:
+    image: postgres
+    volumes:
+      - ./build/init_clearinghouse.sql:/docker-entrypoint-initdb.d/init_clearinghouse.sql
+      - ./build/init_market_data.sql:/docker-entrypoint-initdb.d/init_market_data.sql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "5500:5432"
+    networks:
+      - exchange-network
+
+  rabbitmq:
+    build: 
+      context: ./build
+      dockerfile: Dockerfile.rabbitmq
+    image: rabbitmq
+    ports:
+      - "5700:5672"
+      - "15700:15672"
+    networks:
+      - exchange-network
+
+  rabbitmq-setup:
+    build: 
+      context: ./build
+      dockerfile: Dockerfile.rabbitmq-setup
+    image: rabbitmq-setup
+    command: /bin/bash -c "/app/setup_rabbitmq.sh"
+    depends_on: 
+      - rabbitmq
+    networks:
+      - exchange-network
+networks:
+  exchange-network:
+    driver: bridge

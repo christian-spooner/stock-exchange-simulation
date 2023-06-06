@@ -2,12 +2,12 @@ import json
 import socket
 
 
-def get_balance_request(command):
+def send_settlement_request(message):
     host = "127.0.0.1"
     port = 2403
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_sock:
         client_sock.connect((host, port))
-        message = json.dumps(command)
+        message = json.dumps(message)
         message_bytes = message.encode()
 
         message_length = len(message_bytes)
@@ -20,4 +20,8 @@ def get_balance_request(command):
 
 
 if __name__ == "__main__":
-    get_balance_request({"type": "balance", "client_id": "SINGLE"})
+    send_settlement_request({"type": "deposit", "client_id": "1", "amount": 100.12})
+    send_settlement_request({"type": "withdraw", "client_id": "1", "amount": 50.24})
+    send_settlement_request(
+        {"type": "transfer", "client_id": "1", "to_client_id": "2", "amount": 25}
+    )

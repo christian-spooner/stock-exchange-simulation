@@ -88,7 +88,7 @@ async def make_market():
                 bid_order = {
                     "type": "limit",
                     "security_id": "MSFT",
-                    "client_id": "JANE_STREET",
+                    "client_id": "MARKET_MAKER",
                     "side": "buy",
                     "quantity": 2,
                     "price": bid_price,
@@ -98,7 +98,7 @@ async def make_market():
                 ask_order = {
                     "type": "limit",
                     "security_id": "MSFT",
-                    "client_id": "JANE_STREET",
+                    "client_id": "MARKET_MAKER",
                     "side": "sell",
                     "quantity": 2,
                     "price": ask_price,

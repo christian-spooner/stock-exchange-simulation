@@ -15,7 +15,7 @@ def main():
         order = {
             "type": "limit",
             "security_id": DEFAULT_SECURITY_ID,
-            "client_id": "GAUSS",
+            "client_id": "UNIFROM",
             "side": side,
             "quantity": random.randint(1, 10),
             "price": random.uniform(1, MAX_PRICE),

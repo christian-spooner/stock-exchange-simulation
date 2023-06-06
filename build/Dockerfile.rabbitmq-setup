@@ -1,0 +1,9 @@
+FROM alpine:latest
+
+WORKDIR /app
+RUN apk add --no-cache curl bash
+COPY setup_rabbitmq.sh /app/setup_rabbitmq.sh
+USER root
+RUN chmod +x /app/setup_rabbitmq.sh
+
+CMD ["/app/setup_rabbitmq.sh"]
