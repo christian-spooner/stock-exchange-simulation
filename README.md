@@ -1,5 +1,7 @@
 # Stock Exchange Simulation
 
+![stock_exchange](https://github.com/christian-spooner/stock-exchange-simulation/assets/93479191/44775907-284a-4b63-8099-0f90d92f30ee)
+
 This project implements a stock exchange simulation using a microservices architecture. To build and deploy the exchange locally, run
 ```
 docker compose build
