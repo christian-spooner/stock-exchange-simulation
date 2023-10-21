@@ -9,7 +9,7 @@
 #include "SimpleAmqpClient/Envelope.h"
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
 #include "engine_operator.hpp"
-#include "utils/json.hpp"
+#include "utils/json_util.hpp"
 #include "utils/logger.hpp"
 
 int init_client(const std::string &host, int port) {
