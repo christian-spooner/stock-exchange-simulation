@@ -1,4 +1,4 @@
-#include "engine_operator.h"
+#include "engine_operator.hpp"
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "utils/json.h"
+#include "utils/json.hpp"
 
 // Helper functions
 

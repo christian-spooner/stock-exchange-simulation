@@ -3,9 +3,9 @@
 #include <thread>
 
 #include "boost/asio.hpp"
-#include "gateway.h"
-#include "utils/json_util.h"
-#include "utils/logger.h"
+#include "gateway.hpp"
+#include "utils/json_util.hpp"
+#include "utils/logger.hpp"
 
 using boost::asio::ip::tcp;
 

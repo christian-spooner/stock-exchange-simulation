@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "book.h"
+#include "book.hpp"
 
 void test_queue() {
 	Order o1 = {1, "MSFT", "FOO", 0, 100, 120};
@@ -18,7 +18,7 @@ void test_queue() {
 
 	assert(book->get_bid_max()->price == 121);
 	assert(book->get_ask_min()->price == 122);
-    delete book;
+	delete book;
 
 	std::cout << "Test book, 1: passed" << std::endl;
 }

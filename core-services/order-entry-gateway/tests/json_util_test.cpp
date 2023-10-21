@@ -1,4 +1,4 @@
-#include "utils/json_util.h"
+#include "utils/json_util.hpp"
 
 #include "boost/test/included/unit_test.hpp"
 

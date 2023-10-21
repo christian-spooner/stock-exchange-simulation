@@ -3,7 +3,7 @@
 #include <string>
 
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
-#include "utils/json_util.h"
+#include "utils/json_util.hpp"
 
 namespace rabbitmq_util {
 

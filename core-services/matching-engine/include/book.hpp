@@ -1,11 +1,11 @@
 #pragma once
 
-#include "constants.h"
-#include "data_types.h"
-#include "engine.h"
-#include "limit_buffer.h"
-#include "limit_entry_buffer.h"
-#include "limit_tree.h"
+#include "constants.hpp"
+#include "data_types.hpp"
+#include "engine.hpp"
+#include "limit_buffer.hpp"
+#include "limit_entry_buffer.hpp"
+#include "limit_tree.hpp"
 
 class Engine;
 
@@ -47,8 +47,7 @@ class Book {
 	Limit* askMin;
 
 	bool match_at_limit(Engine& parentEngine, Order& order, Limit& limit);
-	void update_limit(const bool limitEntryFilled, Limit& limit,
-					  LimitEntry* limitEntry);
+	void update_limit(const bool limitEntryFilled, Limit& limit, LimitEntry* limitEntry);
 	void update_limit_entries(Limit* limit, LimitEntry* newEntry, const Order& order);
 	void refresh_bid_max();
 	void refresh_ask_min();

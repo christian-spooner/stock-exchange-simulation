@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-#include "data_types.h"
+#include "data_types.hpp"
 
 /**
  * A buffer to hold the limit entries for a given book.

@@ -1,11 +1,11 @@
-#include "gateway.h"
+#include "gateway.hpp"
 
 #include <chrono>
 #include <iostream>
 
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
-#include "utils/json_util.h"
-#include "utils/rabbitmq_util.h"
+#include "utils/json_util.hpp"
+#include "utils/rabbitmq_util.hpp"
 
 Gateway::Gateway(const std::string &rabbitmq_uri)
 	: rabbitmq_uri_(rabbitmq_uri), connection_(AmqpClient::Channel::CreateFromUri(rabbitmq_uri)) {
@@ -16,8 +16,7 @@ Gateway::Gateway(const std::string &rabbitmq_uri)
 	count_.emplace("SHEL", 0);
 
 	channel_ = connection_;
-	channel_->DeclareExchange("stock_exchange", AmqpClient::Channel::EXCHANGE_TYPE_DIRECT,
-							  true);
+	channel_->DeclareExchange("stock_exchange", AmqpClient::Channel::EXCHANGE_TYPE_DIRECT, true);
 }
 
 std::string Gateway::process_request(const json &request) {

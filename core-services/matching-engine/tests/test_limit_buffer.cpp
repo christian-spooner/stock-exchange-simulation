@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "limit_buffer.h"
+#include "limit_buffer.hpp"
 
 void test_get_limit() {
 	LimitBuffer buff;

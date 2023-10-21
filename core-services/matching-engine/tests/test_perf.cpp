@@ -5,9 +5,9 @@
 #include <iostream>
 #include <vector>
 
-#include "data_types.h"
-#include "engine.h"
-#include "score_feed.h"
+#include "data_types.hpp"
+#include "engine.hpp"
+#include "score_feed.hpp"
 
 int replays = 32 + 1;  // account for warm-up
 
@@ -39,7 +39,7 @@ void analytics(std::vector<unsigned long>& samples) {
 		sumTotal += samples[i];
 	}
 
-	double mean = static_cast<double>(sumTotal) / (replays - 1) ;
+	double mean = static_cast<double>(sumTotal) / (replays - 1);
 	double meanSqDeviation = 0;
 
 	for (int i = 1; i < replays; i++) {

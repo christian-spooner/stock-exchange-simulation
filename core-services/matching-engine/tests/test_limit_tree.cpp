@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "limit_tree.h"
+#include "limit_tree.hpp"
 
 void test_insert_and_find_min_and_max() {
 	LimitTree tree;

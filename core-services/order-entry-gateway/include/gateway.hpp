@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
-#include "utils/json_util.h"
+#include "utils/json_util.hpp"
 
 class Gateway {
    public:

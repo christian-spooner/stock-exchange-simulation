@@ -1,6 +1,6 @@
 #pragma once
 
-#include "data_types.h"
+#include "data_types.hpp"
 
 /**
  * A buffer to hold the price limits of an order book.

@@ -4,9 +4,9 @@
 #include <unordered_map>
 
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
-#include "book.h"
-#include "constants.h"
-#include "data_types.h"
+#include "book.hpp"
+#include "constants.hpp"
+#include "data_types.hpp"
 
 #ifdef _DEBUG
 extern int execNum;
@@ -26,8 +26,7 @@ class Engine {
 		bookMap.emplace("FB", std::make_unique<Book>(*this, "FB"));
 
 		channel = AmqpClient::Channel::CreateFromUri("amqp://guest:guest@rabbitmq:5672/%2F");
-		channel->DeclareExchange("stock_exchange", AmqpClient::Channel::EXCHANGE_TYPE_DIRECT,
-								 true);
+		channel->DeclareExchange("stock_exchange", AmqpClient::Channel::EXCHANGE_TYPE_DIRECT, true);
 	}
 
 	~Engine() {

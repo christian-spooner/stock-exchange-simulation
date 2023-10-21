@@ -8,9 +8,9 @@
 
 #include "SimpleAmqpClient/Envelope.h"
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
-#include "engine_operator.h"
-#include "utils/json.h"
-#include "utils/logger.h"
+#include "engine_operator.hpp"
+#include "utils/json.hpp"
+#include "utils/logger.hpp"
 
 int init_client(const std::string &host, int port) {
 	int client_sock = socket(AF_INET, SOCK_STREAM, 0);

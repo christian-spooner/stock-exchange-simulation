@@ -1,4 +1,4 @@
-#include "book.h"
+#include "book.hpp"
 
 #include <algorithm>
 #include <cassert>
@@ -153,8 +153,8 @@ bool Book::match_at_limit(Engine& parentEngine, Order& order, Limit& limit) {
 		Order& buyOrder = buySide ? order : currentEntry->order;
 		Order& sellOrder = buySide ? currentEntry->order : order;
 		Quantity execQuantity = std::min(order.quantity, currentEntry->order.quantity);
-		
-		if (execQuantity > 0) { // ignore cancelled orders
+
+		if (execQuantity > 0) {	 // ignore cancelled orders
 			parentEngine.execute(buyOrder, sellOrder, execQuantity);
 			buyOrder.quantity -= execQuantity;
 			sellOrder.quantity -= execQuantity;

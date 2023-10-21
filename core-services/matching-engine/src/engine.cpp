@@ -1,4 +1,4 @@
-#include "engine.h"
+#include "engine.hpp"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,8 +7,8 @@
 
 #include <iostream>
 
-#include "utils/json.h"
-#include "utils/logger.h"
+#include "utils/json.hpp"
+#include "utils/logger.hpp"
 
 #ifdef _DEBUG
 int execNum;

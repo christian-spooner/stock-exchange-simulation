@@ -1,4 +1,4 @@
-#include "utils/json_util.h"
+#include "utils/json_util.hpp"
 
 #include <stdexcept>
 

@@ -3,7 +3,7 @@
 #include <string>
 
 #include "SimpleAmqpClient/SimpleAmqpClient.h"
-#include "engine.h"
+#include "engine.hpp"
 
 class EngineOperator {
    public:

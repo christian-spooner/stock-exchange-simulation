@@ -1,8 +1,8 @@
 #include <cassert>
 #include <iostream>
 
-#include "constants.h"
-#include "limit_entry_buffer.h"
+#include "constants.hpp"
+#include "limit_entry_buffer.hpp"
 
 void test_insert() {
 	LimitEntryBuffer buffer("MSFT");

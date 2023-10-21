@@ -3,7 +3,7 @@
 #include <cassert>
 #include <string>
 
-#include "constants.h"
+#include "constants.hpp"
 
 /**
  * Order ID assigned by order entry gateway.

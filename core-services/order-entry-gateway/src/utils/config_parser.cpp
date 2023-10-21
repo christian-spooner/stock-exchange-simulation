@@ -1,9 +1,9 @@
-#include "utils/config_parser.h"
+#include "utils/config_parser.hpp"
 
 #include <fstream>
 #include <stdexcept>
 
-#include "utils/json_util.h"
+#include "utils/json_util.hpp"
 
 ConfigParser::ConfigParser(const std::string& config_file_path) {
 	parse_config_file(config_file_path);

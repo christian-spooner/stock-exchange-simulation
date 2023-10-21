@@ -1,4 +1,4 @@
-#include "limit_tree.h"
+#include "limit_tree.hpp"
 
 Node* LimitTree::makeEmpty(Node* t) {
 	if (t == nullptr) return nullptr;

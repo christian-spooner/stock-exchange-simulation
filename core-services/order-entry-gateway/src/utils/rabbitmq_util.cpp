@@ -1,6 +1,6 @@
-#include "utils/rabbitmq_util.h"
+#include "utils/rabbitmq_util.hpp"
 
-#include "utils/json_util.h"
+#include "utils/json_util.hpp"
 
 namespace rabbitmq_util {
 
