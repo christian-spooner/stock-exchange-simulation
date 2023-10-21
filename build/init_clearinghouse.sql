@@ -31,5 +31,5 @@ VALUES
     ('MSFT', 'FLOOD', 1000),
     ('MSFT', 'GAUSS', 1000),
     ('MSFT', 'RANDOM_WALK', 1000),
-    ('MSFT', 'RETAIL', 1000);
+    ('MSFT', 'RETAIL', 1000),
     ('MSFT', 'SINGLE', 1000);
