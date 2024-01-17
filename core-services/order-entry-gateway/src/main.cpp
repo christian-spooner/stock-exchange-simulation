@@ -41,17 +41,17 @@ void run_server(const std::string& rabbitmq_uri) {
 		std::array<char, 1024> data;
 		boost::system::error_code error;
 		size_t length = socket.read_some(boost::asio::buffer(data), error);
-		std::string received_data(data.data(), length);
-		logger.log(LogLevel::INFO, "Received request: " + received_data);
+		std::string body(data.data(), length);
+		logger.log(LogLevel::INFO, "type: received_message, message: " + body);
 
-		handle_message(received_data, socket, gateway, error);
+		handle_message(body, socket, gateway, error);
 
 		socket.close();
 	}
 }
 
 int main() {
-	logger.initialize("logs.txt", LogLevel::INFO);
+	logger.initialize("./logs/order_entry_gateway.log", LogLevel::INFO);
 	std::string rabbitmq_uri = "amqp://guest:guest@rabbitmq:5672/%2F";
 	run_server(rabbitmq_uri);
 

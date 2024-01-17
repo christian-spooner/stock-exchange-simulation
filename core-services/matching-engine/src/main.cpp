@@ -21,7 +21,7 @@ int init_client(const std::string &host, int port) {
 }
 
 void callback(const std::string &body, const std::string &host, int port) {
-	logger.log(LogLevel::INFO, "Received message: " + body);
+	logger.log(LogLevel::INFO, "type: received_message, message: " + body);
 
 	int client_sock = init_client(host, port);
 	send(client_sock, body.c_str(), body.size(), 0);
@@ -50,7 +50,7 @@ void message_listener(const std::string &queue_name, const std::string &rabbitmq
 }
 
 int main() {
-	logger.initialize("logs.txt", LogLevel::INFO);
+	logger.initialize("./logs/matching_engine.log", LogLevel::INFO);
 	EngineOperator engine_operator;
 	std::thread engine_thread(&EngineOperator::run, &engine_operator);
 

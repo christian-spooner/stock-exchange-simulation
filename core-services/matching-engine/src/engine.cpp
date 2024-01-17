@@ -34,8 +34,8 @@ void Engine::market(Order& order) {
 		auto& book = it->second;
 		if (!book->cross_market_order(order)) {
 			logger.log(LogLevel::INFO,
-					   "Discarded market order, id: " + std::to_string(order.orderId) +
-						   ", security id: " + order.securityId +
+					   "type: dicard_market_order, order_id: " + std::to_string(order.orderId) +
+						   ", security_id: " + order.securityId +
 						   ", quantity: " + std::to_string(order.quantity));
 		}
 	}
@@ -100,7 +100,7 @@ void Engine::queue_price_change(const std::string securityId, const Price bid, c
 void Engine::send_execution_report(Order& order) { execNum++; }
 #else
 void Engine::send_execution_report(Order& order) {
-	logger.log(LogLevel::INFO, "Executing trade for order id: " + std::to_string(order.orderId) +
+	logger.log(LogLevel::INFO, "type: send_exec_report, order_id:" + std::to_string(order.orderId) +
 								   ", security id: " + order.securityId);
 
 	double dollarPrice = order.price / 100.0;
@@ -130,7 +130,7 @@ void Engine::send_cancel_report(Order& order) { cancelNum++; }
 #else
 void Engine::send_cancel_report(Order& order) {
 	logger.log(LogLevel::INFO,
-			   "Sending cancel report for order id: " + std::to_string(order.orderId) +
+			   "[SEND] type: send_cancel_report, order id: " + std::to_string(order.orderId) +
 				   ", security id: " + order.securityId);
 
 	double dollarPrice = order.price / 100.0;
@@ -164,7 +164,7 @@ void Engine::send_price_report(const std::string securityId, const double bid, c
 	std::string askStr = askStream.str();
 
 	logger.log(LogLevel::INFO,
-			   "Sending price report: " + securityId + ", " + bidStr + ", " + askStr);
+			   "type: send_price_report, security_id: " + securityId + ", bid: " + bidStr + ", ask: " + askStr);
 
 	json body = {{"security_id", securityId}, {"bid", bid}, {"ask", ask}, {"timestamp", timestamp}};
 	json priceReport = {{"message_type", "price"}, {"body", body}};

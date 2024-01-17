@@ -46,7 +46,7 @@ namespace MarketDataFeed
                     }
                     else
                     {
-                        Logger.LogInfo("Invalid report received.");
+                        Logger.LogInfo("received_invalid_report", "reason: n/a");
                     }
                 }
                 else if (message != null && message.MessageType == "price" && message.Body != null)
@@ -65,7 +65,7 @@ namespace MarketDataFeed
                     }
                     else
                     {
-                        Logger.LogInfo("Invalid price information received.");
+                        Logger.LogInfo("received_invalid_price_data", "reason: n/a");
                     }
                 }
             }

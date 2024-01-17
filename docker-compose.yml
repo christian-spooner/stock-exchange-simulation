@@ -11,6 +11,8 @@ services:
       - rabbitmq-setup
     networks:
       - exchange-network
+    volumes:
+      - ./logs:/app/logs
 
   market-data-feed:
     build: ./core-services/market-data-feed
@@ -22,6 +24,8 @@ services:
       - rabbitmq-setup
     networks:
       - exchange-network
+    volumes:
+      - ./logs:/app/logs
 
   matching-engine:
     build: ./core-services/matching-engine
@@ -32,6 +36,8 @@ services:
       - rabbitmq-setup
     networks:
       - exchange-network
+    volumes:
+      - ./logs:/usr/src/app/logs
 
   order-entry-gateway:
     build: ./core-services/order-entry-gateway
@@ -42,6 +48,8 @@ services:
       - rabbitmq-setup
     networks:
       - exchange-network
+    volumes:
+      - ./logs:/usr/src/app/logs
 
   db:
     image: postgres
@@ -78,6 +86,38 @@ services:
       - rabbitmq
     networks:
       - exchange-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    networks:
+      - exchange-network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    networks:
+      - exchange-network
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.10.2
+    volumes:
+      - ./logs/logstash-config/:/usr/share/logstash/pipeline/
+      - ./logs/:/usr/share/logstash/logs
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5000:5000"
+    networks:
+      - exchange-network
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
 networks:
   exchange-network:
     driver: bridge

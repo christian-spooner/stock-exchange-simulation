@@ -34,7 +34,7 @@ namespace MarketDataFeed
                 {
                     var body = ea.Body.ToArray();
                     var message = Encoding.UTF8.GetString(body);
-                    Logger.LogInfo($"Received message: {message}");
+                    Logger.LogInfo("received_message", message);
                     await _messageHandler.HandleIncomingMessageAsync(message, stoppingToken);
                 };
 

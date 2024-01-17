@@ -59,6 +59,3 @@ packages/
 TestResults/
 **/TestResults
 **/[Tt]est[Rr]esults
-
-# Misc
-logs.txt

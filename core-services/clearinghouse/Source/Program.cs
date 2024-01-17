@@ -53,7 +53,7 @@ class Program
 
     static void HandleMessage(string message)
     {
-        Logger.LogInfo($"Received message: {message}");
+        Logger.LogInfo("received_message", message);
 
         using (var client = new TcpClient("127.0.0.1", 2402))
         {

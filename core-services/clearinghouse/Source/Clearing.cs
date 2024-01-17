@@ -53,7 +53,7 @@ namespace Clearinghouse
             }
             else
             {
-                Logger.LogInfo("Received invalid settlement request");
+                Logger.LogInfo("invalid_settlement_request", "reason: invalid side");
                 return Result.Failure<Trade>("Invalid side");
             }
 
@@ -65,7 +65,7 @@ namespace Clearinghouse
             Result<Trade> clearingResult = Clear(ref trade);
             if (clearingResult.IsError)
             {
-                Logger.LogInfo($"Failed clearing: {clearingResult.Error}");
+                Logger.LogInfo("clearing_error", $"{clearingResult.Error}");
                 SendReport(trade, false, clearingResult.Error);
                 return;
             }
@@ -73,7 +73,7 @@ namespace Clearinghouse
             Result<Trade> settlementResult = Settle(ref trade, true);
             if (settlementResult.IsError)
             {   
-                Logger.LogInfo($"Failed settlement: {settlementResult.Error}");
+                Logger.LogInfo("settlement_error", $"{settlementResult.Error}");
                 SendReport(trade, false, settlementResult.Error);
                 return;
             }
@@ -111,7 +111,7 @@ namespace Clearinghouse
                 if (responseObject != null && responseObject.Property("balance") != null)
                 {
                     string balance = responseObject["balance"]!.Value<string>()!;
-                    Logger.LogInfo($"Transfer request completed. New balance for {fromClientId}: {balance}");
+                    Logger.LogInfo("transfer_request_complete", $"client_id, {fromClientId}, balance: {balance}");
                     return Result.Success(balance);
                 }
                 else if (responseObject != null && responseObject.Property("error") != null)
@@ -212,7 +212,7 @@ namespace Clearinghouse
                     }
                     catch (IOException)
                     {
-                        Logger.LogInfo($"Connection closed by {tcpClient.Client.RemoteEndPoint}");
+                        Logger.LogInfo("connection_closed", $"{tcpClient.Client.RemoteEndPoint}");
                     }
                     catch (Exception ex)
                     {

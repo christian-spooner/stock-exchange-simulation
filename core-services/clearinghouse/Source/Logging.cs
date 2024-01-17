@@ -12,7 +12,7 @@ namespace Clearinghouse
         {
             traceSource = new TraceSource("Clearinghouse");
             traceSource.Listeners.Clear();
-            traceSource.Listeners.Add(new TextWriterTraceListener(new StreamWriter("logs.txt", true, Encoding.UTF8)));
+            traceSource.Listeners.Add(new TextWriterTraceListener(new StreamWriter("./logs/clearinghouse.log", true, Encoding.UTF8)));
             traceSource.Switch = new SourceSwitch("sourceSwitch", "Verbose");
         }
 
@@ -28,9 +28,10 @@ namespace Clearinghouse
             ((TextWriterTraceListener)traceSource.Listeners[0]).Flush();
         }
 
-        public static void LogInfo(string message)
+        public static void LogInfo(string type, string details)
         {
-            traceSource.TraceEvent(TraceEventType.Information, 0, message);
+            string formattedMessage = $"[INFO] type: {type}, details: {details}";
+            traceSource.TraceEvent(TraceEventType.Information, 0, formattedMessage);
             ((TextWriterTraceListener)traceSource.Listeners[0]).Flush();
         }
     }

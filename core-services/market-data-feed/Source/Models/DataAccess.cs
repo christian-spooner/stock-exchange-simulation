@@ -95,7 +95,7 @@ namespace MarketDataFeed
                                 },
                                 _ => ((Func<string>)(() =>
                                 {
-                                    Logger.LogInfo("Invalid status fetch.");
+                                    Logger.LogInfo("invalid_status_fetch", "reason: must be 'confirmed' or 'denied'");
                                     return "unknown";
                                 }))()
                             };
