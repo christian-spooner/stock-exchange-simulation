@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System;
 using System.IO;
 using System.Text;
 
@@ -6,33 +6,30 @@ namespace Clearinghouse
 {
     public static class Logger
     {
-        private static readonly TraceSource traceSource;
+        private static readonly string logFilePath = "./logs/clearinghouse.log";
 
-        static Logger()
+        private static void Log(string level, string message)
         {
-            traceSource = new TraceSource("Clearinghouse");
-            traceSource.Listeners.Clear();
-            traceSource.Listeners.Add(new TextWriterTraceListener(new StreamWriter("./logs/clearinghouse.log", true, Encoding.UTF8)));
-            traceSource.Switch = new SourceSwitch("sourceSwitch", "Verbose");
+            string logEntry = $"[{level}] {message}";
+            File.AppendAllText(logFilePath, logEntry + Environment.NewLine);
         }
 
-        public static void LogError(string message)
+        public static void LogError(string type, string details)
         {
-            traceSource.TraceEvent(TraceEventType.Error, 2, message);
-            ((TextWriterTraceListener)traceSource.Listeners[0]).Flush();
+            string message = $"type: {type}, details: {details}";
+            Log("ERROR", message);
         }
 
-        public static void LogWarning(string message)
+        public static void LogWarning(string type, string details)
         {
-            traceSource.TraceEvent(TraceEventType.Warning, 1, message);
-            ((TextWriterTraceListener)traceSource.Listeners[0]).Flush();
+            string message = $"type: {type}, details: {details}";
+            Log("WARNING", message);
         }
 
         public static void LogInfo(string type, string details)
         {
-            string formattedMessage = $"[INFO] type: {type}, details: {details}";
-            traceSource.TraceEvent(TraceEventType.Information, 0, formattedMessage);
-            ((TextWriterTraceListener)traceSource.Listeners[0]).Flush();
+            string message = $"type: {type}, details: {details}";
+            Log("INFO", message);
         }
     }
 }

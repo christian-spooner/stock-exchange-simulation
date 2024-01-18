@@ -123,7 +123,7 @@ namespace Clearinghouse
             var settlementCommand = JsonConvert.DeserializeObject<Dictionary<string, object>>(message);
             if (settlementCommand == null || !settlementCommand.ContainsKey("type") || !settlementCommand.ContainsKey("client_id"))
             {
-                Logger.LogInfo("invalid_message", "reason: missing fields");
+                Logger.LogInfo("invalid_message", "{'reason': 'missing fields'}");
                 return Result.Failure<String>("Missing fields");
             }
             else
@@ -143,7 +143,7 @@ namespace Clearinghouse
 
                 if (!settlementCommand.ContainsKey("amount"))
                 {
-                    Logger.LogInfo("invalid_message", "reason: missing amount field");
+                    Logger.LogInfo("invalid_message", "{'reason': 'missing amount field'}");
                     return Result.Failure<String>("Missing fields");
                 }
 
@@ -176,7 +176,7 @@ namespace Clearinghouse
                 }
                 else
                 {
-                    Logger.LogInfo("invalid_message", "reason: operation must be 'deposit', 'withdraw', or 'transfer'");
+                    Logger.LogInfo("invalid_message", "{'reason': 'operation must be deposit, withdraw, or transfer'}");
                 }
 
                 return Result.Success(GetBalance(clientId).Value.ToString());
@@ -228,7 +228,7 @@ namespace Clearinghouse
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError(ex.ToString());
+                        Logger.LogError("loop_error", ex.ToString());
                     }
                 }
             }

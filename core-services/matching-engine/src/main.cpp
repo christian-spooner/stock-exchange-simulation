@@ -21,7 +21,7 @@ int init_client(const std::string &host, int port) {
 }
 
 void callback(const std::string &body, const std::string &host, int port) {
-	logger.log(LogLevel::INFO, "type: received_message, message: " + body);
+	logger.log(LogLevel::INFO, "type: received_message, details: " + body);
 
 	int client_sock = init_client(host, port);
 	send(client_sock, body.c_str(), body.size(), 0);

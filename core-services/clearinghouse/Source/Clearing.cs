@@ -53,7 +53,7 @@ namespace Clearinghouse
             }
             else
             {
-                Logger.LogInfo("invalid_settlement_request", "reason: invalid side");
+                Logger.LogInfo("invalid_settlement_request", "{'reason': 'invalid side'}");
                 return Result.Failure<Trade>("Invalid side");
             }
 
@@ -111,7 +111,7 @@ namespace Clearinghouse
                 if (responseObject != null && responseObject.Property("balance") != null)
                 {
                     string balance = responseObject["balance"]!.Value<string>()!;
-                    Logger.LogInfo("transfer_request_complete", $"client_id, {fromClientId}, balance: {balance}");
+                    Logger.LogInfo("transfer_request_complete", $"{{'client_id': {fromClientId}, 'balance': {balance}}}");
                     return Result.Success(balance);
                 }
                 else if (responseObject != null && responseObject.Property("error") != null)
@@ -121,7 +121,7 @@ namespace Clearinghouse
                 }
                 else
                 {
-                    Logger.LogError($"Transfer request: null response.");
+                    Logger.LogError("transfer_request_error", "{'reason': 'null response'}");
                     return Result.Failure<String>("Null response");
                 }
             }
@@ -216,7 +216,7 @@ namespace Clearinghouse
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError(ex.ToString());
+                        Logger.LogError("loop_error", ex.ToString());
                     }
                 }
             }

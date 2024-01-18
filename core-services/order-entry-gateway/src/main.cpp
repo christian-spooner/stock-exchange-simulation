@@ -42,7 +42,7 @@ void run_server(const std::string& rabbitmq_uri) {
 		boost::system::error_code error;
 		size_t length = socket.read_some(boost::asio::buffer(data), error);
 		std::string body(data.data(), length);
-		logger.log(LogLevel::INFO, "type: received_message, message: " + body);
+		logger.log(LogLevel::INFO, "type: received_message, details: " + body);
 
 		handle_message(body, socket, gateway, error);
 

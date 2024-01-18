@@ -96,7 +96,7 @@ public class WebSocketMiddleware
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex.ToString());
+            Logger.LogError("price_stream_error", ex.ToString());
         }
     }
 
@@ -118,7 +118,7 @@ public class WebSocketMiddleware
         }
         catch(Exception ex)
         {
-            Logger.LogError(ex.ToString());
+            Logger.LogError("report_stream_error", ex.ToString());
         }
     }
 

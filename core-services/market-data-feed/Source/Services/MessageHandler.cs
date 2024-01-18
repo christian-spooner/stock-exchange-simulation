@@ -46,7 +46,7 @@ namespace MarketDataFeed
                     }
                     else
                     {
-                        Logger.LogInfo("received_invalid_report", "reason: n/a");
+                        Logger.LogInfo("received_invalid_report", "{'reason': 'n/a'}");
                     }
                 }
                 else if (message != null && message.MessageType == "price" && message.Body != null)
@@ -65,13 +65,13 @@ namespace MarketDataFeed
                     }
                     else
                     {
-                        Logger.LogInfo("received_invalid_price_data", "reason: n/a");
+                        Logger.LogInfo("received_invalid_price_data", "{'reason': 'n/a'}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex.ToString());
+                Logger.LogError("incoming_message_error", ex.ToString());
             }
         }
 
